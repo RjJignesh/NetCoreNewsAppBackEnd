@@ -1,0 +1,14 @@
+E:\External\Yadav\News\DataAccess\bin\Debug\net7.0\DataAccess.deps.json
+E:\External\Yadav\News\DataAccess\bin\Debug\net7.0\DataAccess.runtimeconfig.json
+E:\External\Yadav\News\DataAccess\bin\Debug\net7.0\DataAccess.dll
+E:\External\Yadav\News\DataAccess\bin\Debug\net7.0\DataAccess.pdb
+E:\External\Yadav\News\DataAccess\obj\Debug\net7.0\DataAccess.csproj.AssemblyReference.cache
+E:\External\Yadav\News\DataAccess\obj\Debug\net7.0\DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+E:\External\Yadav\News\DataAccess\obj\Debug\net7.0\DataAccess.AssemblyInfoInputs.cache
+E:\External\Yadav\News\DataAccess\obj\Debug\net7.0\DataAccess.AssemblyInfo.cs
+E:\External\Yadav\News\DataAccess\obj\Debug\net7.0\DataAccess.csproj.CoreCompileInputs.cache
+E:\External\Yadav\News\DataAccess\obj\Debug\net7.0\DataAccess.dll
+E:\External\Yadav\News\DataAccess\obj\Debug\net7.0\refint\DataAccess.dll
+E:\External\Yadav\News\DataAccess\obj\Debug\net7.0\DataAccess.pdb
+E:\External\Yadav\News\DataAccess\obj\Debug\net7.0\DataAccess.genruntimeconfig.cache
+E:\External\Yadav\News\DataAccess\obj\Debug\net7.0\ref\DataAccess.dll
