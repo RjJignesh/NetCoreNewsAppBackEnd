@@ -6,6 +6,8 @@
     using DataAccess.Dto;
     using DataAccess.Model;
     using Microsoft.EntityFrameworkCore;
+    using System;
+
     public class NewsService : INewsService
     {
         #region Fields Declaration
@@ -35,7 +37,7 @@
         #endregion
 
         /// <summary>
-        /// Fetch all news and top news. 
+        /// Fetch all news and top news also bookmark news. 
         /// </summary>
         /// <returns></returns>
         public async Task<List<NewsDto>> FetchAllNews()
@@ -45,17 +47,41 @@
             return allNewsDtos;
         }
 
+        /// <summary>
+        /// Fetch all Bookmarked news 
+        /// </summary>
+        /// <param name="bookMark"></param>
+        /// <returns></returns>
+        public async Task<List<NewsDto>> FetchAllBookmarkedNews(bool bookMark)
+        {
+            var allBookmarkedNews = await this.newsDbContext.News.Where(news => news.IsBookMark == bookMark).OrderByDescending(news => news.Date).ToListAsync();
+            var allBookmarkedNewsDtos = this.newsMapper.Map<List<News>, List<NewsDto>>(allBookmarkedNews);
+            return allBookmarkedNewsDtos;
+        }
+
 
         /// <summary>
         /// Fetch all news. 
         /// </summary>
         /// <returns></returns>
-        public async Task<List<NewsDto>> SearchInAllNews(string searchText)
+        public async Task<List<NewsDto>> SearchInAllNews(string searchText, bool bookMarkSearch)
         {
-            var allNews = await (this.newsDbContext.News.Where(news => news.Title.ToLower().Contains            
-            (searchText.ToLower()) || news.Detail.ToLower().Contains(searchText.ToLower()))).OrderBy
-            (news => news.Title).ThenBy(news => news.Detail).AsQueryable().ToListAsync();
-            var allNewsDtos = this.newsMapper.Map<List<News>, List<NewsDto>>(allNews);
+            var allNews = new List<News>();
+            if (bookMarkSearch)
+            {
+                allNews = await (this.newsDbContext.News.Where(news => (news.IsBookMark == bookMarkSearch) && (news.Title.ToLower().Contains(searchText.ToLower())
+                    || news.Detail.ToLower().Contains(searchText.ToLower()))).OrderBy
+                    (news => news.Title)).ThenBy(news => news.Detail).AsQueryable().ToListAsync();             
+
+            }
+            else
+            {
+                allNews = await (this.newsDbContext.News.Where(news => news.Title.ToLower()
+             .Contains(searchText.ToLower()) || news.Detail.ToLower()
+             .Contains(searchText.ToLower()))).OrderBy(news => news.Title).ThenBy(news => news.Detail).AsQueryable().ToListAsync();
+
+            }
+            dvar allNewsDtos = this.newsMapper.Map<List<News>, List<NewsDto>>(allNews);
             return allNewsDtos;
         }
 
@@ -113,5 +139,7 @@
             this.newsDbContext.SaveChanges();
             return news.Id ?? string.Empty;
         }
+
+
     }
 }

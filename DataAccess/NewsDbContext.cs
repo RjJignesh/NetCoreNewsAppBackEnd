@@ -37,8 +37,8 @@ namespace DataAccess
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseCosmos("UriOfYourAzureCosMosdbAcc", "PrimaryKey",
-                       "DbName");
+                optionsBuilder.UseCosmos("https://3e32106b-0ee0-4-231-b9ee.documents.azure.com:443/", "yPpx7pNzEqCu19zV1EgH8f9N7SrZkTcckgW3OM6ikD4Mrs6vItl0ggQPlXDpSaMBifNS3XOpwvcCACDbZ0Mzug==",
+                       "NewsDb");
             }
         }
 

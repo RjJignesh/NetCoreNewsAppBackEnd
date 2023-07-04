@@ -26,6 +26,10 @@
         #endregion
 
         #region News Apis
+        /// <summary>
+        /// api for fetch all news
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(typeof(List<NewsDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -35,14 +39,29 @@
             return newsList.Count == 0 ? Results.NoContent() : Results.Ok(newsList);
         }
 
+        /// <summary>
+        /// api for fetch all bookmarked news
+        /// </summary>
+        /// <param name="bookMark"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("FetchAllBookmarkedNews")]
+        [ProducesResponseType(typeof(List<NewsDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IResult> FetchAllBookmarkedNews(bool bookMark)
+        {
+            var bookmarkednewsList = await this.newsService.FetchAllBookmarkedNews(bookMark);
+            return bookmarkednewsList.Count == 0 ? Results.NoContent() : Results.Ok(bookmarkednewsList);
+        }
+
 
         [Route("SearchAllNews")]
         [HttpGet]
         [ProducesResponseType(typeof(List<NewsDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IResult> SearchAllNews(string searchText)
+        public async Task<IResult> SearchAllNews(string searchText,bool bookMarkSearch)
         {
-            var newsList = await this.newsService.SearchInAllNews(searchText);
+            var newsList = await this.newsService.SearchInAllNews(searchText, bookMarkSearch);
             return newsList.Count == 0 ? Results.NoContent() : Results.Ok(newsList);
         }
 
@@ -67,7 +86,7 @@
             HttpContext.Features.Get<IExceptionHandlerFeature>()!;
 
             var isBookMark = await this.newsService.BookMarkNews(newsId);
-            return isBookMark ? Results.Ok(ResponseHelper.Success(isBookMark)) : Results.Problem(detail: exceptionHandlerFeature.Error.StackTrace, title: exceptionHandlerFeature.Error.Message);
+            return isBookMark ? Results.Ok(ResponseHelper.Success(isBookMark)) : Results.Problem(detail: "News not found.", title: "News not found.");
         }
 
 
@@ -117,6 +136,7 @@
                         newsDto.ImagePath = string.Concat("~NewsImages/", newsImage.FileName);
                         newsDto.Id = System.Guid.NewGuid().ToString();
                         newsDto.Date = DateTime.UtcNow.Date;
+                        newsDto.Provider = newsDto.Provider.ToUpper();
                         this.newsService.SaveNews(newsDto);
                     }
                 }

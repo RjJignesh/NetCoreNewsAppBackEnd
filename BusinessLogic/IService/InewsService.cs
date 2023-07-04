@@ -14,10 +14,16 @@
         Task<List<NewsDto>> FetchAllNews();
 
         /// <summary>
+        ///Fetch all Bookmarked news table
+        /// </summary>
+        /// <returns></returns>
+        Task<List<NewsDto>> FetchAllBookmarkedNews(bool bookMark);
+
+        /// <summary>
         /// Fetch all news. 
         /// </summary>
         /// <returns></returns>
-        Task<List<NewsDto>> SearchInAllNews(string searchText);
+        Task<List<NewsDto>> SearchInAllNews(string searchText, bool bookMarkSearch);
 
 
         /// <summary>

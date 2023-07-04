@@ -18,13 +18,11 @@
         /// <summary>
         /// News title 
         /// </summary>
-
         public string? Title { get; set; }
 
         /// <summary>
         /// News Detail
         /// </summary>
-
         public string? Detail { get; set; }
 
         /// <summary>
@@ -34,7 +32,7 @@
         public string? ImagePath { get; set; }
 
         /// <summary>
-        /// Indicate that particular news is book marked or not 
+        /// Indicate that particular news is bookmarked or not 
         /// </summary>
 
         public bool? IsBookMark { get; set; }
@@ -42,7 +40,12 @@
         /// <summary>
         /// Date of particular news
         /// </summary>
-
         public DateTime? Date { get; set; }
+
+
+        /// <summary>
+        /// news provider name
+        /// </summary>
+        public string? Provider { get; set; }
     }
 }

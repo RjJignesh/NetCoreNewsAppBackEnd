@@ -10,7 +10,8 @@
         {
             RuleFor(p => p.Title).NotEmpty().WithMessage("Title is required");
             RuleFor(p => p.Detail).NotEmpty().WithMessage("Detail is required");
-            RuleFor(p => p.NewsImage).NotEmpty().WithMessage("News image is required");            
+            RuleFor(p => p.NewsImage).NotEmpty().WithMessage("News image is required");           
+            RuleFor(p => p.Provider).NotEmpty().NotNull().WithMessage("Provider is required");            
         }
     }
 }

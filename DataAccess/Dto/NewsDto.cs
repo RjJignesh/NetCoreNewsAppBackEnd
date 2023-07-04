@@ -31,7 +31,7 @@
         public string? ImagePath { get; set; } = string.Empty;
 
         /// <summary>
-        /// Indicate that particular news is book marked or not 
+        /// Indicate that particular news is bookmarked or not 
         /// </summary>
         public bool IsBookMark { get; set; }
 
@@ -44,6 +44,11 @@
         /// Filed for hold actual image data
         /// </summary>
         [Required(ErrorMessage = "Please provide NewsImage")]
-        public IFormFile NewsImage { get; set; }     
+        public IFormFile NewsImage { get; set; }
+
+        /// <summary>
+        /// news provider name
+        /// </summary>
+        public string? Provider { get; set; }
     }
 }
